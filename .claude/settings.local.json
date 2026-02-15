@@ -1,0 +1,8 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(dir \"C:\\\\Users\\\\kodyg\\\\OneDrive\\\\Desktop\\\\o\\\\art\\\\komastudio\" /s)",
+      "Bash(node build.js:*)"
+    ]
+  }
+}

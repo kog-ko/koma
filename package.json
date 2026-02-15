@@ -1,0 +1,6 @@
+{
+  "name": "komastudio",
+  "scripts": {
+    "build": "node build.js"
+  }
+}
