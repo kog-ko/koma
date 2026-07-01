@@ -27,11 +27,15 @@ artists.forEach(artist => {
       .replace(/[-_]/g, ' ')
       .replace(/\b\w/g, c => c.toUpperCase());
 
+    let medium = 'Digital';
+    if (['.mp4', '.mov', '.webm'].includes(ext)) medium = 'Video';
+    else if (ext === '.gif') medium = 'GIF';
+
     artwork.push({
       title,
       artist,
       file: `artwork/${artist}/${file}`,
-      medium: '',
+      medium,
       year: new Date().getFullYear().toString()
     });
   });
