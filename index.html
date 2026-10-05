@@ -557,9 +557,9 @@
     <div class="header-inner">
       <a class="logo" onclick="showTab('all')">koma <em>studio</em></a>
       <nav>
-        <button class="nav-btn active" data-tab="all" onclick="showTab('all')">Works</button>
-        <button class="nav-btn" data-tab="emma" onclick="showTab('emma')">Emma</button>
-        <button class="nav-btn" data-tab="kody" onclick="showTab('kody')">Kody</button>
+        <button class="nav-btn" data-tab="analog" onclick="showTab('analog')">Analog</button>
+        <button class="nav-btn" data-tab="digital" onclick="showTab('digital')">Digital</button>
+        <button class="nav-btn" data-tab="game-dev" onclick="showTab('game-dev')">Game Dev</button>
       </nav>
     </div>
   </header>
@@ -569,11 +569,11 @@
     <div class="hero-stats" id="hero-stats"></div>
     <h1 id="hero-title">
       <span class="word">A</span>
-      <span class="word">shared</span>
+      <span class="word">personal</span>
       <span class="word">creative</span>
       <span class="word"><em>space</em></span>
     </h1>
-    <p id="hero-subtitle">The ongoing archive of Emma &amp; Kody's work, gathered in one place.</p>
+    <p id="hero-subtitle">The ongoing archive of my work, gathered in one place.</p>
   </section>
 
   <!-- Artist Header -->
@@ -596,7 +596,7 @@
         <circle cx="50" cy="50" r="13" fill="var(--accent)"></circle>
       </svg>
       <h3>No pieces yet</h3>
-      <p>Add files to artwork/emma or artwork/kody and redeploy.</p>
+      <p>Add files to artwork/analog, artwork/digital or artwork/game-dev and redeploy.</p>
     </div>
   </section>
 
@@ -634,6 +634,11 @@
     let allPieces = [];
     let currentList = [];
     let currentTab = 'all';
+    const CATEGORIES = {
+      'analog':   { name: 'Analog art',       code: 'AN', role: 'Pastel, marker & ink on paper' },
+      'digital':  { name: 'Digital art',      code: 'DI', role: 'Illustration, animation & 3D' },
+      'game-dev': { name: 'Game development', code: 'GD', role: 'Prototypes, builds & store art' }
+    };
     let lightboxIndex = -1;
     let mouseX = 0, mouseY = 0, cursorX = 0, cursorY = 0;
 
@@ -705,9 +710,9 @@
 
     function renderStats() {
       const year = new Date().getFullYear();
-      const hands = new Set(allPieces.map(p => p.artist)).size;
+      const hands = new Set(allPieces.map(p => p.category)).size;
       document.getElementById('hero-stats').innerHTML =
-        `INDEX &middot; ${year}<br>${allPieces.length} WORK${allPieces.length !== 1 ? 'S' : ''}<br>${hands} ARTIST${hands !== 1 ? 'S' : ''}`;
+        `INDEX &middot; ${year}<br>${allPieces.length} WORK${allPieces.length !== 1 ? 'S' : ''}<br>${hands} DISCIPLINE${hands !== 1 ? 'S' : ''}`;
       document.getElementById('footer-count').textContent =
         `${allPieces.length} WORK${allPieces.length !== 1 ? 'S' : ''} IN THE ARCHIVE`;
     }
@@ -719,9 +724,9 @@
       const countEl = document.getElementById('piece-count');
       const labelEl = document.getElementById('gallery-label');
 
-      currentList = currentTab === 'all' ? allPieces : allPieces.filter(p => p.artist === currentTab);
+      currentList = currentTab === 'all' ? allPieces : allPieces.filter(p => p.category === currentTab);
 
-      const labels = { all: 'Selected works', emma: "Emma's works", kody: "Kody's works" };
+      const labels = { all: 'Selected works', ...Object.fromEntries(Object.entries(CATEGORIES).map(([k, v]) => [k, v.name])) };
       labelEl.textContent = labels[currentTab];
 
       if (currentList.length === 0) {
@@ -735,7 +740,7 @@
       countEl.textContent = `${currentList.length} piece${currentList.length !== 1 ? 's' : ''}`;
 
       gallery.innerHTML = currentList.map((piece, i) => {
-        const code = piece.artist === 'emma' ? 'EM' : 'KO';
+        const code = CATEGORIES[piece.category].code;
         const isVideo = piece.mediaType === 'video';
         return `
         <div class="gallery-item" onclick="openLightbox(${i})">
@@ -746,7 +751,7 @@
             <span class="tag">${code}/${String(i + 1).padStart(2, '0')}</span>
           </div>
           <div class="piece-title">${piece.title}</div>
-          <div class="piece-meta">${piece.artist.toUpperCase()} &middot; ${(piece.medium || '').toUpperCase()} &middot; ${piece.year}</div>
+          <div class="piece-meta">${CATEGORIES[piece.category].name.toUpperCase()} &middot; ${(piece.medium || '').toUpperCase()} &middot; ${piece.year}</div>
         </div>
       `;
       }).join('');
@@ -774,11 +779,11 @@
         const hero = document.getElementById('hero');
         const artistHeader = document.getElementById('artist-header');
 
-        if (tab === 'emma' || tab === 'kody') {
+        if (CATEGORIES[tab]) {
           hero.style.display = 'none';
           artistHeader.classList.add('visible');
-          document.getElementById('artist-name').textContent = tab === 'emma' ? 'Emma' : 'Kody';
-          document.getElementById('artist-role').textContent = tab === 'emma' ? 'Fine art & mixed media' : 'Digital art & illustration';
+          document.getElementById('artist-name').textContent = CATEGORIES[tab].name;
+          document.getElementById('artist-role').textContent = CATEGORIES[tab].role;
         } else {
           artistHeader.classList.remove('visible');
           hero.style.display = '';
@@ -820,7 +825,7 @@
 
       document.getElementById('lightbox-title').textContent = piece.title;
       document.getElementById('lightbox-meta').textContent =
-        `${piece.artist.charAt(0).toUpperCase() + piece.artist.slice(1)} · ${piece.medium || ''} · ${piece.year}`;
+        `${CATEGORIES[piece.category].name} · ${piece.medium || ''} · ${piece.year}`;
       document.getElementById('lightbox-counter').textContent =
         `${String(lightboxIndex + 1).padStart(2, '0')} / ${String(currentList.length).padStart(2, '0')}`;
     }
