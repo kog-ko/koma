@@ -91,7 +91,7 @@
       .filters { margin-left: 0; width: 100%; }
       .chip { flex: 1; padding: 0 8px; }
     }
-    @media (max-width: 479px) { .chip small { display: none; } }
+    @media (max-width: 479px) { .chip small { display: none; } .chip { padding: 0 4px; font-size: 13px; } .filters { gap: 4px; } }
 
     /* ── Grid ── */
     main { padding: var(--gap) var(--gap) 0; }
@@ -136,6 +136,15 @@
       border-radius: 3px;
       pointer-events: none;
     }
+
+    .about { display: none; max-width: 640px; padding: 40px var(--pad) 24px; }
+    .about h1 { font-size: clamp(32px, 8vw, 48px); font-weight: 800; letter-spacing: -.03em; line-height: 1.05; margin-bottom: 18px; }
+    .about p { font-size: 17px; color: #cfcfcc; margin-bottom: 14px; }
+    .about a { color: var(--fg); }
+    body.show-about .about { display: block; }
+    body.show-about .grid, body.show-about .empty { display: none; }
+    .chip.text { border-color: transparent; }
+    .chip.text[aria-pressed="true"] { border-color: var(--fg); }
 
     .empty { padding: 4rem 1rem; text-align: center; color: var(--dim); display: none; }
 
@@ -214,6 +223,12 @@
   </header>
 
   <main>
+    <section class="about" id="about">
+      <h1>Kody</h1>
+      <!-- Edit this text to change the About page -->
+      <p>Artist and game developer. I make analog work in pastel, marker and ink, digital illustration, animation and 3D, and games under Chum Studios.</p>
+      <p>Everything on this site is my own work, gathered in one place.</p>
+    </section>
     <div class="grid" id="grid"></div>
     <p class="empty" id="empty">Nothing here yet.</p>
   </main>
@@ -248,6 +263,22 @@
     const isVideo = p => p.medium === 'Video';
 
     const pieces = typeof artwork === 'undefined' ? [] : artwork;
+    // "All" view: shuffle within each category, then spread each category evenly
+    // across the whole list so no type clumps together. New order on each load.
+    function mixed(items) {
+      const keyed = [];
+      Object.keys(CATEGORIES).forEach(c => {
+        const g = items.filter(p => p.category === c);
+        for (let i = g.length - 1; i > 0; i--) {
+          const j = Math.floor(Math.random() * (i + 1));
+          [g[i], g[j]] = [g[j], g[i]];
+        }
+        g.forEach((p, i) => keyed.push([(i + Math.random()) / g.length, p]));
+      });
+      return keyed.sort((x, y) => x[0] - y[0]).map(k => k[1]);
+    }
+    const mixedAll = mixed(pieces);
+
     let filter = 'all';
     let list = [];
     let viewing = -1;
@@ -262,17 +293,18 @@
       const items = [['all', 'All'], ...Object.entries(CATEGORIES)];
       $('filters').innerHTML = items.map(([key, label]) =>
         `<button class="chip" data-f="${key}" aria-pressed="${key === filter}">${label}<small>${counts[key] || 0}</small></button>`
-      ).join('');
+      ).join('') + `<button class="chip text" data-f="about" aria-pressed="${filter === 'about'}">About</button>`;
     }
 
     function filterFromHash() {
       const h = location.hash.replace('#', '');
-      return CATEGORIES[h] ? h : 'all';
+      return CATEGORIES[h] || h === 'about' ? h : 'all';
     }
 
     function setFilter(f, scroll) {
       filter = f;
-      list = f === 'all' ? pieces : pieces.filter(p => p.category === f);
+      list = f === 'all' ? mixedAll : pieces.filter(p => p.category === f);
+      document.body.classList.toggle('show-about', f === 'about');
       document.querySelectorAll('.chip').forEach(c => c.setAttribute('aria-pressed', c.dataset.f === f));
       renderGrid();
       if (scroll) window.scrollTo({ top: 0 });
@@ -295,8 +327,8 @@
 
     function renderGrid() {
       videoObserver && videoObserver.disconnect();
-      $('empty').style.display = list.length ? 'none' : 'block';
-      $('foot-count').textContent = `${list.length} piece${list.length !== 1 ? 's' : ''}`;
+      $('empty').style.display = list.length || filter === 'about' ? 'none' : 'block';
+      $('foot-count').textContent = filter === 'about' ? '' : `${list.length} piece${list.length !== 1 ? 's' : ''}`;
 
       grid.innerHTML = list.map((p, i) => {
         const ratio = p.w && p.h ? `aspect-ratio:${p.w}/${p.h}` : 'aspect-ratio:4/5';

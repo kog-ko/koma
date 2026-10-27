@@ -17,14 +17,6 @@ const artwork = [
     "h": 3045
   },
   {
-    "title": "Juno",
-    "category": "analog",
-    "file": "artwork/analog/juno.png",
-    "medium": "Image",
-    "w": 1080,
-    "h": 1080
-  },
-  {
     "title": "Man",
     "category": "analog",
     "file": "artwork/analog/man.jpg",
