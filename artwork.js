@@ -41,14 +41,6 @@ const artwork = [
     "h": 480
   },
   {
-    "title": "Dust & Iron",
-    "category": "digital",
-    "file": "artwork/digital/Dust & Iron.png",
-    "medium": "Image",
-    "w": 2048,
-    "h": 2048
-  },
-  {
     "title": "FISH",
     "category": "digital",
     "file": "artwork/digital/FISH.mp4",
@@ -145,12 +137,28 @@ const artwork = [
     "h": 1080
   },
   {
+    "title": "Fire",
+    "category": "game-dev",
+    "file": "artwork/game-dev/Fire.gif",
+    "medium": "GIF",
+    "w": 300,
+    "h": 534
+  },
+  {
     "title": "Koma",
     "category": "game-dev",
     "file": "artwork/game-dev/Koma.png",
     "medium": "Image",
     "w": 1919,
     "h": 1079
+  },
+  {
+    "title": "Lush",
+    "category": "game-dev",
+    "file": "artwork/game-dev/Lush.gif",
+    "medium": "GIF",
+    "w": 300,
+    "h": 534
   },
   {
     "title": "Mr. Flim",
