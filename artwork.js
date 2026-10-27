@@ -5,160 +5,183 @@ const artwork = [
     "category": "analog",
     "file": "artwork/analog/cat.jpg",
     "medium": "Image",
-    "year": "2026"
+    "w": 675,
+    "h": 414
   },
   {
     "title": "HxH",
     "category": "analog",
     "file": "artwork/analog/HxH.jpg",
     "medium": "Image",
-    "year": "2026"
+    "w": 2972,
+    "h": 3045
   },
   {
     "title": "Juno",
     "category": "analog",
     "file": "artwork/analog/juno.png",
     "medium": "Image",
-    "year": "2026"
+    "w": 1080,
+    "h": 1080
   },
   {
     "title": "Man",
     "category": "analog",
     "file": "artwork/analog/man.jpg",
     "medium": "Image",
-    "year": "2026"
+    "w": 543,
+    "h": 714
   },
   {
     "title": "Wolf Pastel",
     "category": "analog",
     "file": "artwork/analog/Wolf Pastel.png",
     "medium": "Image",
-    "year": "2026"
+    "w": 1224,
+    "h": 1584
   },
   {
     "title": "Archie",
     "category": "digital",
     "file": "artwork/digital/archie.mov",
     "medium": "Video",
-    "year": "2026"
+    "w": 542,
+    "h": 480
   },
   {
     "title": "Dust & Iron",
     "category": "digital",
     "file": "artwork/digital/Dust & Iron.png",
     "medium": "Image",
-    "year": "2026"
+    "w": 2048,
+    "h": 2048
   },
   {
     "title": "FISH",
     "category": "digital",
     "file": "artwork/digital/FISH.mp4",
     "medium": "Video",
-    "year": "2026"
+    "w": 1920,
+    "h": 1080
   },
   {
     "title": "Horse",
     "category": "digital",
     "file": "artwork/digital/horse.gif",
     "medium": "GIF",
-    "year": "2026"
+    "w": 426,
+    "h": 240
   },
   {
     "title": "IronDraw",
     "category": "digital",
     "file": "artwork/digital/IronDraw.mp4",
     "medium": "Video",
-    "year": "2026"
+    "w": 1080,
+    "h": 1080
   },
   {
     "title": "Masks",
     "category": "digital",
     "file": "artwork/digital/Masks.jpg",
     "medium": "Image",
-    "year": "2026"
+    "w": 1800,
+    "h": 2546
   },
   {
     "title": "Queen",
     "category": "digital",
     "file": "artwork/digital/queen.png",
     "medium": "Image",
-    "year": "2026"
+    "w": 447,
+    "h": 559
   },
   {
     "title": "Sci Fi",
     "category": "digital",
     "file": "artwork/digital/sci-fi.mp4",
     "medium": "Video",
-    "year": "2026"
+    "w": 1430,
+    "h": 1080
   },
   {
     "title": "2D Prototype Game",
     "category": "game-dev",
     "file": "artwork/game-dev/2D Prototype Game.gif",
     "medium": "GIF",
-    "year": "2026"
+    "w": 426,
+    "h": 240
   },
   {
     "title": "3D Prototype Game",
     "category": "game-dev",
     "file": "artwork/game-dev/3D Prototype Game.gif",
     "medium": "GIF",
-    "year": "2026"
+    "w": 426,
+    "h": 240
   },
   {
     "title": "Call It Dock",
     "category": "game-dev",
     "file": "artwork/game-dev/Call It Dock.jpg",
     "medium": "Image",
-    "year": "2026"
+    "w": 1380,
+    "h": 776
   },
   {
     "title": "Call It Steam Header",
     "category": "game-dev",
     "file": "artwork/game-dev/Call It Steam Header.gif",
     "medium": "GIF",
-    "year": "2026"
+    "w": 920,
+    "h": 430
   },
   {
     "title": "Chum Studios Banner",
     "category": "game-dev",
     "file": "artwork/game-dev/Chum Studios Banner.gif",
     "medium": "GIF",
-    "year": "2026"
+    "w": 960,
+    "h": 300
   },
   {
     "title": "Dithered Prototype",
     "category": "game-dev",
     "file": "artwork/game-dev/Dithered Prototype.mp4",
     "medium": "Video",
-    "year": "2026"
+    "w": 1920,
+    "h": 1080
   },
   {
     "title": "Koma",
     "category": "game-dev",
     "file": "artwork/game-dev/Koma.png",
     "medium": "Image",
-    "year": "2026"
+    "w": 1919,
+    "h": 1079
   },
   {
     "title": "Mr. Flim",
     "category": "game-dev",
     "file": "artwork/game-dev/Mr. Flim.png",
     "medium": "Image",
-    "year": "2026"
+    "w": 1264,
+    "h": 664
   },
   {
     "title": "Street Prototype",
     "category": "game-dev",
     "file": "artwork/game-dev/Street Prototype.gif",
     "medium": "GIF",
-    "year": "2026"
+    "w": 426,
+    "h": 240
   },
   {
     "title": "Wireframe Hand",
     "category": "game-dev",
     "file": "artwork/game-dev/Wireframe Hand.png",
     "medium": "Image",
-    "year": "2026"
+    "w": 715,
+    "h": 743
   }
 ];
